@@ -1,0 +1,1 @@
+export const USER_SET_AUTH_USER = "USER_SET_AUTH_USER";

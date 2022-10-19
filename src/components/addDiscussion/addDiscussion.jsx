@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import SVG from 'react-inlinesvg';
 import plus from "../resources/image/addDiscussion/plus.svg";
+import { userAsyncSetAuthUser } from "../../store/actions/user/userActions";
 
 
 
@@ -15,12 +16,16 @@ export const AddDiscussion = React.memo( function AddDiscussion(props){
 
     const dispatch = useDispatch();
 
+    function handleTest(){
+        dispatch(userAsyncSetAuthUser());
+    }
+
     return(
         <Fragment>
 
             <div className="addDiscussion">
                 <div className="addDiscussion__fakeButton">
-                    <div className="addDiscussion__fakeButtonBorder">
+                    <div onClick={handleTest} className="addDiscussion__fakeButtonBorder">
                         <SVG src={plus}/>
                     </div>
                 </div>
