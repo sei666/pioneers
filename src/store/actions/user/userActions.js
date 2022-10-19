@@ -1,4 +1,4 @@
-import { getUserByToken } from "../../../services/userRequests"
+import { getUserByToken, login } from "../../../services/userRequests"
 import { USER_SET_AUTH_USER } from "./userTypes"
 
 export const userSetAuthUser = (authUser) =>{
@@ -26,6 +26,22 @@ export const userAsyncSetAuthUser = () =>{
             })
             .catch(e => {
                 console.log('notAuth');
+                console.log(e);
+            });
+    }
+}
+
+export const userAsyncLogin = (username, password) =>{
+    return function (dispatch){
+        login(username, password)
+            .then(response => {
+                console.log(response.data);
+                if (response.data.token){
+                    localStorage.setItem('token', response.data.token);
+                    dispatch(userAsyncSetAuthUser)
+                }
+            })
+            .catch(e => {
                 console.log(e);
             });
     }

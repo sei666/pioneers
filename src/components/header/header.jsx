@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import './header.scss';
 
 
@@ -8,8 +8,39 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useDispatch } from "react-redux";
+import { userAsyncLogin } from "../../store/actions/user/userActions";
 
 export const Header = React.memo( function Header(props){
+    const dispatch = useDispatch();
+    const [select, setSelect] = useState("S");
+
+    function handleLogin(username){
+        console.log("handleLogin");
+        localStorage.setItem('username', username);
+        setSelect(username.charAt(0).toUpperCase());
+        dispatch(userAsyncLogin(username, 'password'));
+    }
+
+    function handleChangeUser(e){
+        console.log("handleChangeUser");
+        handleLogin(e);
+    }
+
+    useEffect(() => {
+        console.log("useEffect")
+        var username = localStorage.getItem('username');
+        var token = localStorage.getItem('token');
+        if (token && username){
+            console.log("exist");
+            setSelect(username.charAt(0).toUpperCase());
+        }
+        else{
+            console.log("not exist");
+            username = 'sei';
+            handleLogin(username);
+        }
+    },[]);
 
     return(
         <Fragment>
@@ -42,14 +73,15 @@ export const Header = React.memo( function Header(props){
 
                             <DropdownButton
                                 variant="outline-primary"
-                                title="S"
+                                title={select}
                                 id="input-group-dropdown-1"
                                 className="avatar"
+                                onSelect={handleChangeUser}
                             >
-                                <Dropdown.Item href="#">sei666</Dropdown.Item>
-                                <Dropdown.Item href="#">gur019</Dropdown.Item>
-                                <Dropdown.Item href="#">telega815</Dropdown.Item>
-                                <Dropdown.Divider />
+                                <Dropdown.Item eventKey="sei" href="#">sei</Dropdown.Item>
+                                <Dropdown.Item eventKey="gur" href="#">gur</Dropdown.Item>
+                                <Dropdown.Item eventKey="telega" href="#">telega</Dropdown.Item>
+                                <Dropdown.Divider/>
                                 <Dropdown.Item disabled href="#">Select User</Dropdown.Item>
                             </DropdownButton>
 
