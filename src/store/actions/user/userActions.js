@@ -17,7 +17,6 @@ export const userAsyncSetAuthUser = () =>{
                 if (response.data.token === "empty"){
                     console.log(response.data, 'authUserCall');
                     localStorage.setItem('token', "");
-                    // dispatch(appSetAuthUser('empty'));
                 }
                 else{
                     console.log(response.data, "auth");
