@@ -1,0 +1,77 @@
+@import "../../varibles.scss";
+
+.post{
+    display: flex;
+    margin-top: 30px;
+
+    &__countBlock{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: .2s;
+
+        &:hover .post__count{
+            color: $color-blue;
+        }
+        svg{
+            transition: .2s;
+            width: 20px;
+            height: 20px;
+            fill: $color-black;
+        }
+        &:hover svg{
+            fill: $color-blue;
+        }
+    }
+    &__count{
+        transition: .2s;
+        line-height: 1;
+        font-size: 24px;
+        font-weight: bold;
+        color: $color-black;
+    }
+
+    &__textBlock{
+        width: 100%;
+        margin-left: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $line-color;
+    }
+
+    &__title{
+        font-size: 18px;
+        font-weight: bold;
+        transition: .2s;
+        cursor: pointer;
+        text-decoration: none;
+        color: $color-black;
+        &:hover {
+            color: $color-blue;
+        }
+
+    }
+    &__subTitle{
+        margin-top: 15px;
+        color: $text-color-a;
+    }
+
+    &__commentBlock{
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+
+        svg{
+            width: 12px;
+            height: 12px;
+            fill: $text-color-a;
+        }
+    }
+    &__countComments{
+        margin-left: 8px;
+        color: $text-color-a;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+}

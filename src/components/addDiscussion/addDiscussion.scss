@@ -1,0 +1,48 @@
+@import "../../varibles.scss";
+
+.addDiscussion{
+    margin-top: 30px;
+    background-color: rgba($color: $color-blue, $alpha: .05);
+    border-radius: 10px;
+    padding: 15px;
+
+    &__fakeButton{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        width: 35px;
+        background-color: rgba($color: $color-blue, $alpha: .05);
+        border-radius: 50%;
+    }
+    &__fakeButtonBorder{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid $color-blue;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+
+        svg{
+            width: 10px;
+            height: 10px;
+            fill: $color-blue;
+        }
+    }
+
+    &__title{
+        margin-top: 15px;
+        font-weight: bold;
+    }
+    &__subTitle{
+        margin-top: 15px;
+        color: $text-color-a;
+    }
+
+    .btn-outline-primary{
+        margin-top: 15px !important;
+        margin: 0;
+        font-weight: 600;
+    }
+}

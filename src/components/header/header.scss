@@ -1,0 +1,75 @@
+@import "../../varibles.scss";
+
+.navbar{
+    border-bottom: 1px solid $line-color;
+    .avatar{
+        // height: 40px;
+        // width: 40px;
+        // background-image: url(../resources/image/header/cheerful-curly-business-girl-wearing-glasses.jpg);
+        // background-size: cover;
+        // background-repeat: no-repeat;
+        // background-position: center;
+        // border-radius: 50%;
+        // margin-left: 15px;
+        // border: 3px solid $color-blue;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        // font-size: 20px;
+        // font-weight: bold;
+        // user-select: none;
+
+        .btn-outline-primary{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-left: 15px;
+            border: 3px solid $color-blue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            user-select: none;
+            // &::after{
+            //     display: none;
+            // }
+        }
+    }
+    .btn-outline-primary{
+        font-weight: bold;
+    }
+    .btn-outline-secondary{
+        border: 0;
+        font-weight: 600;
+
+        &:hover{
+            color: $color-blue;
+            background-color: rgba($color: $color-blue, $alpha: .1);
+        }
+    }
+    .activeBtn{
+        color: $color-blue;
+        background-color: rgba($color: $color-blue, $alpha: .1);
+    }
+    .navbar-brand{
+        width: 150px;
+        height: 40px;
+        background-image: url(../resources/image/header/logotype-compact.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+@media (max-width: 991.98px){
+    .navbar-nav{
+        text-align: center;
+        .avatar{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+    }
+}

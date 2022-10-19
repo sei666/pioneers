@@ -1,0 +1,144 @@
+@import "../../varibles.scss";
+
+.postViewer{
+    min-height: calc(100vh - 271px);
+    .breadcrumb{
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    
+        svg{
+            width: 15px;
+            height: 15px;
+            margin-right: 15px;
+            fill: $text-color-a;
+        }
+    
+        .breadcrumb-item{
+            font-weight: 600;
+            
+            a{
+                text-decoration: none;
+                color: $text-color-a;
+                transition: .2s;
+    
+                &:hover{
+                    color: $color-blue;
+                }
+            }
+            
+        }
+    
+        .active{
+            color: $color-blue;
+            
+        }
+    }
+
+    &__post{
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $line-color;
+    }
+    &__title{
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    &__creatorPost{
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+        color: $text-color-a;
+    }
+    &__countBlock{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: .2s;
+
+        &:hover .post__count{
+            color: $color-blue;
+        }
+        svg{
+            transition: .2s;
+            width: 20px;
+            height: 20px;
+            fill: $color-black;
+        }
+        &:hover svg{
+            fill: $color-blue;
+        }
+    }
+    &__count{
+        transition: .2s;
+        line-height: 1;
+        font-size: 24px;
+        font-weight: bold;
+        color: $color-black;
+    }
+    &__textBlock{
+        width: 100%;
+        margin-left: 15px;
+        padding-bottom: 15px;
+        // border-bottom: 1px solid $line-color;
+    }
+    &__avatar{
+        height: 30px;
+        width: 30px;
+        min-height: 30px;
+        min-width: 30px;
+        border: 2px solid $color-blue;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: $color-black;
+    }
+    &__userName, &__data, &__separator{
+        margin-left: 10px;
+    }
+    &__tagBlock{
+        display: flex;
+        flex-wrap: wrap;
+        scroll-padding-top: 15px;
+    }
+    &__tag{
+        width: auto;
+        padding: 0 10px;
+        background-color: rgba($color: $color-blue, $alpha: .1);
+        color: $color-blue;
+        border-radius: 5px;
+        margin: 5px;
+    }
+    .btn-outline-primary{
+        font-weight: 600;
+    }
+
+    &__addComment{
+        padding-bottom: 30px;
+        border-bottom: 1px solid $line-color;
+    }
+
+    &__inputForm{
+        display: flex;
+    }
+    .btn-primary{
+        margin-left: 5px;
+    }
+
+    &__commentBlock{
+        padding-bottom: 15px;
+        border-bottom: 1px solid $line-color;
+    }
+
+
+}
+
+
