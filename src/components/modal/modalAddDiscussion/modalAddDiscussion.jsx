@@ -61,8 +61,14 @@ export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props)
         if (event){
             event.preventDefault();
         }
-        console.log("hi")
-        dispatch(postAsyncCreatePost("asdds", "asdads", "asdasd"));
+        let title = event.target.title.value;
+        let text = event.target.text.value
+        let listTags = []
+        for (let key in tags){
+            listTags.push(tags[key]["label"])
+        }
+        console.log(title, text, listTags)
+        dispatch(postAsyncCreatePost(title, text, listTags));
     }
 
     
@@ -91,11 +97,11 @@ export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props)
                     <Form onSubmit={handleCreatePost} className="mt-3">
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" placeholder="Enter here" required />
+                            <Form.Control type="text" name="title" placeholder="Enter here" required />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={3} placeholder="Enter here" required />
+                            <Form.Control as="textarea" name="text" rows={3} placeholder="Enter here" required />
                         </Form.Group>
 
                         <div className="mb-3">

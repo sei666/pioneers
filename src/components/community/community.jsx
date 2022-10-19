@@ -85,10 +85,10 @@ export const Community = React.memo( function Community(props){
 
                         {isMobile && <AddDiscussion/>}
 
-                        {props.postItem && 
-                            props.postItem.map((item) =>{
+                        {posts && 
+                            posts.map((post) =>{
                                 return(
-                                    <Post item={item} key={item.id} />
+                                    <Post post={post} key={post.id} />
                                 )  
                             })
                         }

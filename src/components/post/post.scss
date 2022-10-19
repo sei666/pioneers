@@ -4,6 +4,15 @@
     display: flex;
     margin-top: 30px;
 
+    .permanent-glow{
+        .post__count{
+            color: $color-blue;
+        }
+        & svg{
+            fill: $color-blue;
+        }
+    }
+
     &__countBlock{
         display: flex;
         flex-direction: column;

@@ -1,3 +1,4 @@
+import { setLike, unsetLike } from "../../../services/likeRequests"
 import { getPosts, postCreate } from "../../../services/postRequests"
 import { appSetModalAddDiscussionsShowBool } from "../app/appActions"
 import { POST_SET_POSTS } from "./postTypes"
@@ -30,12 +31,41 @@ export const postAsyncCreatePost = (title, text, tags) =>{
             .then(response => {
                 console.log(response.data);
                 dispatch(appSetModalAddDiscussionsShowBool(false));
+                dispatch(postAsyncSetPosts())
             })
             .catch(e => {
                 console.log(e);
             });
     }
 }
+
+export const postAsyncSetLike = (postId) => {
+    return function (dispatch){
+        setLike(postId)
+            .then(response => {
+                console.log(response.data);
+                dispatch(postAsyncSetPosts())
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+}
+
+export const postAsyncUnsetLike = (postId) => {
+    return function (dispatch){
+        unsetLike(postId)
+            .then(response => {
+                console.log(response.data);
+                dispatch(postAsyncSetPosts())
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+}
+
+
 
 
 
