@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useDispatch } from "react-redux";
-import { userAsyncLogin } from "../../store/actions/user/userActions";
+import { userAsyncLogin, userAsyncSetAuthUser } from "../../store/actions/user/userActions";
 
 export const Header = React.memo( function Header(props){
     const dispatch = useDispatch();
@@ -34,6 +34,7 @@ export const Header = React.memo( function Header(props){
         if (token && username){
             console.log("exist");
             setSelect(username.charAt(0).toUpperCase());
+            dispatch(userAsyncSetAuthUser());
         }
         else{
             console.log("not exist");

@@ -18,10 +18,12 @@ import Pagination from 'react-bootstrap/Pagination';
 import SVG from 'react-inlinesvg';
 import search from "../resources/image/community/search.svg";
 import { ModalAddDiscussion } from "../modal/modalAddDiscussion/modalAddDiscussion";
+import { shallowEqual, useSelector } from "react-redux";
 
 
 
 export const Community = React.memo( function Community(props){
+    const authUser = useSelector((state) => state.user.authUser, shallowEqual);
 
     //   --------------------------------------------Mobile---------------------------------------------------------
 
@@ -36,7 +38,8 @@ export const Community = React.memo( function Community(props){
 
     return(
         <Fragment>
-
+            {authUser &&
+            <>
             <ModalAddDiscussion/>
 
             <Container fluid="md" className="community">
@@ -106,7 +109,8 @@ export const Community = React.memo( function Community(props){
             </Container>
               
 
-
+            </>
+        }
         </Fragment>
     )
 });

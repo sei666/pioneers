@@ -38,7 +38,7 @@ export const userAsyncLogin = (username, password) =>{
                 console.log(response.data);
                 if (response.data.token){
                     localStorage.setItem('token', response.data.token);
-                    dispatch(userAsyncSetAuthUser)
+                    window.location.reload(false);
                 }
             })
             .catch(e => {
