@@ -12,6 +12,7 @@ import { appSetModalAddDiscussionsShowBool } from "../../../store/actions/app/ap
 
 import SVG from 'react-inlinesvg';
 import times from "../../resources/image/addDiscussion/times.svg";
+import { postAsyncCreatePost } from "../../../store/actions/post/postActions";
 
 export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props){
     
@@ -56,6 +57,16 @@ export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props)
         setTags([]);
     }
 
+    function handleCreatePost(event){
+        if (event){
+            event.preventDefault();
+        }
+        console.log("hi")
+        dispatch(postAsyncCreatePost("asdds", "asdads", "asdasd"));
+    }
+
+    
+
     
     return(
         <Fragment>
@@ -77,7 +88,7 @@ export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props)
 
                     <div className="modalAddDiscussion__text">Do you have something to share with fellow learners?</div>
 
-                    <Form className="mt-3">
+                    <Form onSubmit={handleCreatePost} className="mt-3">
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" placeholder="Enter here" required />

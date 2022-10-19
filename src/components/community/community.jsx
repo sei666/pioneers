@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import './community.scss';
 
 import { AddDiscussion } from "../addDiscussion/addDiscussion";
@@ -18,12 +18,19 @@ import Pagination from 'react-bootstrap/Pagination';
 import SVG from 'react-inlinesvg';
 import search from "../resources/image/community/search.svg";
 import { ModalAddDiscussion } from "../modal/modalAddDiscussion/modalAddDiscussion";
-import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { postAsyncSetPosts } from "../../store/actions/post/postActions";
 
 
 
 export const Community = React.memo( function Community(props){
+    const dispatch = useDispatch();
     const authUser = useSelector((state) => state.user.authUser, shallowEqual);
+    const posts = useSelector((state) => state.post.posts, shallowEqual);
+
+    useEffect(() => {
+        dispatch(postAsyncSetPosts())
+    },[]);
 
     //   --------------------------------------------Mobile---------------------------------------------------------
 
