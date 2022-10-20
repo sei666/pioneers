@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import './community.scss';
 
 import { AddDiscussion } from "../addDiscussion/addDiscussion";
@@ -27,6 +27,21 @@ export const Community = React.memo( function Community(props){
     const dispatch = useDispatch();
     const authUser = useSelector((state) => state.user.authUser, shallowEqual);
     const posts = useSelector((state) => state.post.posts, shallowEqual);
+    const searchWordRef = useRef(null);
+    const [methodSort, setMethodSort] = useState("Without")
+
+
+    function handleSearchPosts (e) {
+        if (!e){
+            e = methodSort;
+        }
+        dispatch(postAsyncSetPosts(e, searchWordRef.current.value));
+    }
+
+    function handleChangeSort (e) {
+        setMethodSort(e);
+        handleSearchPosts(e);
+    }
 
     useEffect(() => {
         dispatch(postAsyncSetPosts())
@@ -61,24 +76,29 @@ export const Community = React.memo( function Community(props){
                         <div className="community__block d-flex">
                             <InputGroup className="mb-3">
                                 <InputGroup.Text id="inputGroup-sizing-default">
-                                    <SVG src={search}/>
+                                    <SVG onClick={handleSearchPosts} src={search}/>
                                 </InputGroup.Text>
                                 <Form.Control
                                 aria-label="Default"
                                 aria-describedby="inputGroup-sizing-default"
                                 placeholder="Find a post"
+                                ref = {searchWordRef}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') {
+                                        handleSearchPosts();  
+                                    }
+                                }}
                                 />
                             </InputGroup>
                             <DropdownButton
                                 variant="outline-primary"
-                                title="Trending"
+                                title={methodSort}
                                 id="input-group-dropdown-1"
+                                onSelect={handleChangeSort}
                             >
-                                <Dropdown.Item href="#">Action</Dropdown.Item>
-                                <Dropdown.Item href="#">Another action</Dropdown.Item>
-                                <Dropdown.Item href="#">Something else here</Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item href="#">Separated link</Dropdown.Item>
+                                <Dropdown.Item eventKey="Without" href="#">Without</Dropdown.Item>
+                                <Dropdown.Item eventKey="Trending up" href="#">Trending up</Dropdown.Item>
+                                <Dropdown.Item eventKey="Trending down" href="#">Trending down</Dropdown.Item>
                             </DropdownButton>
 
                         </div>

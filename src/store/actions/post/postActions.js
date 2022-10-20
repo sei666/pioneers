@@ -21,9 +21,9 @@ export const postSetPost = (post) =>{
     }
 }
 
-export const postAsyncSetPosts = () => {
+export const postAsyncSetPosts = (trending, findWord) => {
     return function (dispatch){
-        getPosts()
+        getPosts(trending, findWord)
             .then(response => {
                 console.log(response.data);
                 dispatch(postSetPosts(response.data));

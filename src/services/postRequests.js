@@ -9,11 +9,9 @@ export async function getPost(postId) {
     return await API.get( BASE_POST_URL + '/post/' + postId );
 }
 
-export async function getPosts(trendingBool, findWord) {
-    trendingBool = true
-    findWord = ""
+export async function getPosts(trending, findWord) {
     var params = new URLSearchParams();
-    trendingBool && params.append("trendingBool", trendingBool);
+    trending && params.append("trending", trending);
     findWord && params.append("findWord", findWord);
 
     var request = {
