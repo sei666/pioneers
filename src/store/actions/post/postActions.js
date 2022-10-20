@@ -61,29 +61,38 @@ export const postAsyncCreatePost = (title, text, tags) =>{
     }
 }
 
-export const postAsyncSetLike = (postId) => {
+export const postAsyncSetLike = (boolLike, postId, many) => {
     return function (dispatch){
-        setLike(postId)
-            .then(response => {
-                console.log(response.data);
-                dispatch(postAsyncSetPosts())
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-}
-
-export const postAsyncUnsetLike = (postId) => {
-    return function (dispatch){
-        unsetLike(postId)
-            .then(response => {
-                console.log(response.data);
-                dispatch(postAsyncSetPosts())
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        if(boolLike){
+            unsetLike(postId)
+                .then(response => {
+                    console.log(response.data);
+                    if (many){
+                        dispatch(postAsyncSetPosts(postId));
+                    }
+                    else{
+                        dispatch(postAsyncSetPost(postId));
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        }
+        else{
+            setLike(postId)
+                .then(response => {
+                    console.log(response.data);
+                    if (many){
+                        dispatch(postAsyncSetPosts(postId));
+                    }
+                    else{
+                        dispatch(postAsyncSetPost(postId));
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        }
     }
 }
 

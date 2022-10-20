@@ -2,6 +2,14 @@
 
 .postViewer{
     min-height: calc(100vh - 271px);
+    .permanent-glow{
+        .post__count{
+            color: $color-blue;
+        }
+        & svg{
+            fill: $color-blue;
+        }
+    }
     .breadcrumb{
         display: flex;
         align-items: center;

@@ -7,7 +7,7 @@ import comment from "../resources/image/post/comment-alt.svg";
 
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postAsyncSetLike, postAsyncUnsetLike } from "../../store/actions/post/postActions";
+import { postAsyncSetLike, postAsyncSetPosts } from "../../store/actions/post/postActions";
 
 export const Post = React.memo( function Post(props){
     const dispatch = useDispatch()
@@ -16,12 +16,8 @@ export const Post = React.memo( function Post(props){
 
     function handleSetLike(){
         console.log("pressed like");
-        if (props.post.boolLike){
-            dispatch(postAsyncUnsetLike(props.post.id));
-        }
-        else{
-            dispatch(postAsyncSetLike(props.post.id));
-        } 
+
+        dispatch(postAsyncSetLike(props.post.boolLike, props.post.id, true));
     }
 
     useEffect(() => {

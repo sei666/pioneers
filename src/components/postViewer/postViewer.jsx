@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import './postViewer.scss';
 
 
@@ -20,6 +20,7 @@ import { useMediaQuery } from 'react-responsive';
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { postAsyncSetPost } from "../../store/actions/post/postActions";
 import { commentAsyncCreateComment, commentAsyncSetComments } from "../../store/actions/comment/commentActions";
+import { postAsyncSetLike } from "../../store/actions/post/postActions";
 
 import { toDateTime } from "../general/functions";
 
@@ -31,6 +32,8 @@ export const PostViewer = React.memo( function PostViewer(props){
     const comments = useSelector((state) => state.comment.comments, shallowEqual);
     const authUser = useSelector((state) => state.user.authUser, shallowEqual);
 
+    const likeCountBlockOfPostRef = useRef(null);
+
     let { postId } = useParams();
 
     useEffect(() => {
@@ -41,6 +44,17 @@ export const PostViewer = React.memo( function PostViewer(props){
         }
     },[authUser]);
 
+    useEffect(() => {
+        if (post){
+            if (post.boolLike){
+                likeCountBlockOfPostRef.current.classList.add("permanent-glow");
+            }
+            else{
+                likeCountBlockOfPostRef.current.classList.remove("permanent-glow");
+            }
+        }
+    },[post]);
+
     function handleCreateComment(event){
         if (event){
             event.preventDefault();
@@ -48,6 +62,11 @@ export const PostViewer = React.memo( function PostViewer(props){
         let text = event.target.text.value
         dispatch(commentAsyncCreateComment(postId, text));
         event.target.text.value = "";
+    }
+
+    function handleSetLike(){
+        console.log("pressed like");
+        dispatch(postAsyncSetLike(post.boolLike, post.id, false));
     }
     
 
@@ -81,9 +100,9 @@ export const PostViewer = React.memo( function PostViewer(props){
 
                         <div className="postViewer__post">
                             <div className="d-flex">
-                                <div className="postViewer__countBlock">
+                                <div ref = {likeCountBlockOfPostRef} onClick = {handleSetLike} className="postViewer__countBlock">
                                     <SVG src={caret} />
-                                    <div className="postViewer__count">{post.likeCounterOfPost}</div>
+                                    <div className="post__count">{post.likeCounterOfPost}</div>
                                 </div>
 
                                 <div className="postViewer__textBlock">
