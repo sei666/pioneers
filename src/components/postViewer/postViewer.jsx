@@ -47,6 +47,7 @@ export const PostViewer = React.memo( function PostViewer(props){
         }
         let text = event.target.text.value
         dispatch(commentAsyncCreateComment(postId, text));
+        event.target.text.value = "";
     }
     
 
