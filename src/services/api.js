@@ -6,7 +6,7 @@ import { BASE_URL_API } from "./urlConstants";
 
 // Default config options
 const defaultOptions = {
-  baseURL: BASE_URL_API + ":5001",
+  baseURL: BASE_URL_API,
   responseType: "json"
 };
 
