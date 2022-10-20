@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import './postViewer.scss';
 
 
@@ -17,12 +17,24 @@ import { ModalAddDiscussion } from "../modal/modalAddDiscussion/modalAddDiscussi
 import {  useParams } from "react-router-dom";
 
 import { useMediaQuery } from 'react-responsive';
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { postAsyncSetPost } from "../../store/actions/post/postActions";
+
+import { toDateTime } from "../general/functions";
 
 
 
 export const PostViewer = React.memo( function PostViewer(props){
+    const dispatch = useDispatch();
+    const post = useSelector((state) => state.post.post, shallowEqual);
+    const authUser = useSelector((state) => state.user.authUser, shallowEqual);
 
-    let { id } = useParams();
+    let { postId } = useParams();
+
+    useEffect(() => {
+        console.log(postId);
+        dispatch(postAsyncSetPost(postId));
+    },[authUser]);
 
     //   --------------------------------------------Mobile---------------------------------------------------------
 
@@ -36,7 +48,8 @@ export const PostViewer = React.memo( function PostViewer(props){
 
     return(
         <Fragment>
-
+            { post && authUser &&
+            <>
             <ModalAddDiscussion/>
 
             <Container fluid="md" className="postViewer">
@@ -54,29 +67,33 @@ export const PostViewer = React.memo( function PostViewer(props){
                             <div className="d-flex">
                                 <div className="postViewer__countBlock">
                                     <SVG src={caret} />
-                                    <div className="postViewer__count">{props.postItem[id].postLike}</div>
+                                    <div className="postViewer__count">{post.likeCounterOfPost}</div>
                                 </div>
 
                                 <div className="postViewer__textBlock">
                                     <div className="postViewer__title">
-                                        {props.postItem[id].title}
+                                        {post.title}
                                         <Button variant="outline-primary">Subscribe to post</Button>
                                     </div>
                                     
                                     <div className="postViewer__creatorPost">
-                                        <div className="postViewer__avatar">{props.postItem[id].userNameCreatorPost.split('')[0]}</div>
-                                        <div className="postViewer__userName">{props.postItem[id].userNameCreatorPost}</div>
+                                        <div className="postViewer__avatar">{post.creator.charAt(0).toUpperCase()}</div>
+                                        <div className="postViewer__userName">{post.creator}</div>
                                         <div className="postViewer__separator">•</div>
-                                        <div className="postViewer__data">{props.postItem[id].data}</div>
+                                        <div className="postViewer__data">{toDateTime(post.timestamp)}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div>To prevent a leak of infotmation, please, make possible to hide names of users!</div>
+                            <div>{post.text}</div>
 
                             <div className="postViewer__tagBlock">
-                                <div className="postViewer__tag">Students</div>
-                                <div className="postViewer__tag">Students</div>
-                                <div className="postViewer__tag">Students</div>
+                                {post.tags && 
+                                    post.tags.map((tag) => {
+                                        return (
+                                            <div key = {tag} className="postViewer__tag">{tag}</div>
+                                        )
+                                    })
+                                }
                             </div>
 
                         </div>
@@ -84,10 +101,10 @@ export const PostViewer = React.memo( function PostViewer(props){
                         <div className="postViewer__addComment">
 
                             <div className="postViewer__creatorPost">
-                                <div className="postViewer__avatar">{props.postItem[id].userNameCreatorPost.split('')[0]}</div>
-                                <div className="postViewer__userName">{props.postItem[id].userNameCreatorPost}</div>
+                                <div className="postViewer__avatar">{authUser.username.charAt(0).toUpperCase()}</div>
+                                <div className="postViewer__userName">{authUser.username}</div>
                                 <div className="postViewer__separator">•</div>
-                                <div className="postViewer__data">{props.postItem[id].data}</div>
+                                <div className="postViewer__data">{toDateTime(post.timestamp)}</div>
                             </div>
 
 
@@ -101,7 +118,7 @@ export const PostViewer = React.memo( function PostViewer(props){
 
                         </div>
 
-                        {props.postItem[id].comment && 
+                        {/* {props.postItem[id].comment && 
                             props.postItem[id].comment.map((item) => {
                                 return (
                                     <div key={item.id} className="postViewer__commentBlock">
@@ -118,7 +135,7 @@ export const PostViewer = React.memo( function PostViewer(props){
                                     </div>
                                 )
                             })
-                        }
+                        } */}
 
 
                     </Col>
@@ -127,7 +144,8 @@ export const PostViewer = React.memo( function PostViewer(props){
             </Container>
               
 
-
+        </>
+        }
         </Fragment>
     )
 });

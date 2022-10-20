@@ -1,7 +1,8 @@
-import { POST_SET_POSTS } from "../../actions/post/postTypes";
+import { POST_SET_POST, POST_SET_POSTS } from "../../actions/post/postTypes";
 
 const initialState = {
-    posts: ""
+    posts: "",
+    post: ""
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -9,6 +10,8 @@ export const postReducer = (state = initialState, action) => {
     switch (type) {
         case POST_SET_POSTS:
             return {...state, posts: payload.posts };
+        case POST_SET_POST:
+            return {...state, post: payload.post };
         default:
             return state;
     }

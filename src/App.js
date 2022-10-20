@@ -104,8 +104,8 @@ function App() {
         <Header />
 
           <Routes>
-              <Route path="/" element={<Community postItem={postItem}/>}></Route>
-              <Route path="/post-viewer/:id" element={<PostViewer postItem={postItem}/>}></Route>
+              <Route path="/" element={<Community/>}></Route>
+              <Route path="/post-viewer/:postId" element={<PostViewer postItem={postItem}/>}></Route>
           </Routes>
 
         <Footer/>
