@@ -61,6 +61,7 @@ export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props)
         if (event){
             event.preventDefault();
         }
+        // dispatch(appSetModalAddDiscussionsShowBool(false));
         let title = event.target.title.value;
         let text = event.target.text.value
         let listTags = []
@@ -69,6 +70,7 @@ export const ModalAddDiscussion = React.memo( function ModalAddDiscussion(props)
         }
         console.log(title, text, listTags)
         dispatch(postAsyncCreatePost(title, text, listTags));
+        dispatch(appSetModalAddDiscussionsShowBool(false));
     }
 
     
