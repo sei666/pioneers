@@ -71,7 +71,7 @@ export const Community = React.memo( function Community(props){
                     <Col xs={!isMobile ? 6 : 15}>
                         <div className="community__block">
                             <div className="community__title">Community</div>
-                            <div className="community__subTitle">43 threads avalible</div>
+                            <div className="community__subTitle">{posts.length} threads avalible</div>
                         </div>
                         <div className="community__block d-flex">
                             <InputGroup className="mb-3">
