@@ -9,6 +9,16 @@ export async function getPost(postId) {
     return await API.get( BASE_POST_URL + '/post/' + postId );
 }
 
-export async function getPosts() {
-    return await API.get( BASE_POST_URL + '/posts' );
+export async function getPosts(trendingBool, findWord) {
+    trendingBool = true
+    findWord = ""
+    var params = new URLSearchParams();
+    trendingBool && params.append("trendingBool", trendingBool);
+    findWord && params.append("findWord", findWord);
+
+    var request = {
+    params: params
+    };
+
+    return await API.get( BASE_POST_URL + '/posts', request);
 }

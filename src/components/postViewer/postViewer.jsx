@@ -85,7 +85,7 @@ export const PostViewer = React.memo( function PostViewer(props){
         <Fragment>
             { post && authUser &&
             <>
-            <ModalAddDiscussion/>
+            {/* <ModalAddDiscussion/> */}
 
             <Container fluid="md" className="postViewer">
                 <Row>
