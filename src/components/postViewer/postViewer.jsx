@@ -19,6 +19,7 @@ import {  useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { postAsyncSetPost } from "../../store/actions/post/postActions";
+import { commentAsyncCreateComment, commentAsyncSetComments } from "../../store/actions/comment/commentActions";
 
 import { toDateTime } from "../general/functions";
 
@@ -27,14 +28,28 @@ import { toDateTime } from "../general/functions";
 export const PostViewer = React.memo( function PostViewer(props){
     const dispatch = useDispatch();
     const post = useSelector((state) => state.post.post, shallowEqual);
+    const comments = useSelector((state) => state.comment.comments, shallowEqual);
     const authUser = useSelector((state) => state.user.authUser, shallowEqual);
 
     let { postId } = useParams();
 
     useEffect(() => {
         console.log(postId);
-        dispatch(postAsyncSetPost(postId));
+        if (authUser){
+            dispatch(postAsyncSetPost(postId));
+            dispatch(commentAsyncSetComments(postId));
+        }
     },[authUser]);
+
+    function handleCreateComment(event){
+        if (event){
+            event.preventDefault();
+        }
+        let text = event.target.text.value
+        dispatch(commentAsyncCreateComment(postId, text));
+    }
+    
+
 
     //   --------------------------------------------Mobile---------------------------------------------------------
 
@@ -108,9 +123,9 @@ export const PostViewer = React.memo( function PostViewer(props){
                             </div>
 
 
-                            <Form className="mt-3 postViewer__inputForm">
+                            <Form onSubmit={handleCreateComment} className="mt-3 postViewer__inputForm">
                                 <Form.Group className="w-100" controlId="exampleForm.ControlInput1">
-                                    <Form.Control type="text" placeholder="Leave Comment" required />
+                                    <Form.Control type="text" name="text" placeholder="Leave Comment" required />
                                 </Form.Group>
 
                                 <Button variant="primary" type="submit">Submit</Button>
@@ -118,24 +133,24 @@ export const PostViewer = React.memo( function PostViewer(props){
 
                         </div>
 
-                        {/* {props.postItem[id].comment && 
-                            props.postItem[id].comment.map((item) => {
+                        {comments && 
+                            comments.map((comment) => {
                                 return (
-                                    <div key={item.id} className="postViewer__commentBlock">
+                                    <div key={comment.id} className="postViewer__commentBlock">
 
                                         <div className="postViewer__creatorPost">
-                                            <div className="postViewer__avatar">{item.userNameCreatorComment.split('')[0]}</div>
-                                            <div className="postViewer__userName">{item.userNameCreatorComment}</div>
+                                            <div className="postViewer__avatar">{comment.creator.charAt(0).toUpperCase()}</div>
+                                            <div className="postViewer__userName">{comment.creator}</div>
                                             <div className="postViewer__separator">•</div>
-                                            <div className="postViewer__data">{item.data}</div>
+                                            <div className="postViewer__data">{toDateTime(comment.timestamp)}</div>
                                         </div>
 
-                                        <div className="mt-2">{item.text}</div>
+                                        <div className="mt-2">{comment.text}</div>
 
                                     </div>
                                 )
                             })
-                        } */}
+                        }
 
 
                     </Col>
