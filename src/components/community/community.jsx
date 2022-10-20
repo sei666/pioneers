@@ -114,7 +114,7 @@ export const Community = React.memo( function Community(props){
                         }
 
 
-                        <Pagination>
+                        {/* <Pagination>
                             <Pagination.Prev className='page-item-prev' />
 
                             <Pagination.Item className="page-item-center" active >{1}</Pagination.Item>
@@ -122,7 +122,7 @@ export const Community = React.memo( function Community(props){
                             <Pagination.Item className="page-item-center">{3}</Pagination.Item>
 
                             <Pagination.Next className='page-item-next' />
-                        </Pagination>
+                        </Pagination> */}
 
                         
 
