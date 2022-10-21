@@ -60,15 +60,18 @@ export const Community = React.memo( function Community(props){
 
     return(
         <Fragment>
-            {authUser &&
-            <>
+ 
             <ModalAddDiscussion/>
 
             <Container fluid="md" className="community">
+                
                 <Row>
+                    
                     {!isMobile && <Col></Col>}
                     
                     <Col xs={!isMobile ? 6 : 15}>
+                        {authUser &&
+                               <>
                         <div className="community__block">
                             <div className="community__title">Community</div>
                             <div className="community__subTitle">{posts.length} threads avalible</div>
@@ -125,19 +128,23 @@ export const Community = React.memo( function Community(props){
                         </Pagination> */}
 
                         
-
+                        </>
+                    }
                     </Col>
                     {!isMobile && 
                         <Col>
                             <AddDiscussion/>
                         </Col>
                     }
-                </Row>               
+                  
+                </Row>   
+                
+                        
             </Container>
               
 
-            </>
-        }
+            
+        
         </Fragment>
     )
 });

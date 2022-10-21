@@ -83,15 +83,15 @@ export const PostViewer = React.memo( function PostViewer(props){
 
     return(
         <Fragment>
-            { post && authUser &&
-            <>
+            
             {/* <ModalAddDiscussion/> */}
 
             <Container fluid="md" className="postViewer">
                 <Row>
                     {!isMobile && <Col></Col>}
                     <Col xs={!isMobile ? 6 : 15}>
-
+                        { post && authUser &&
+                            <>
                         <Breadcrumb>
                             <SVG src={folder}/>
                             <Breadcrumb.Item href="/">Community</Breadcrumb.Item>
@@ -171,7 +171,8 @@ export const PostViewer = React.memo( function PostViewer(props){
                                 )
                             })
                         }
-
+                                </>
+                    }
 
                     </Col>
                     {!isMobile && <Col></Col>}
@@ -179,8 +180,7 @@ export const PostViewer = React.memo( function PostViewer(props){
             </Container>
               
 
-        </>
-        }
+        
         </Fragment>
     )
 });
