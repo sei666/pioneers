@@ -36,6 +36,7 @@ export const postAsyncSetPosts = (trending, findWord) => {
 
 export const postAsyncSetPost = (postId) => {
     return function (dispatch){
+        dispatch(postSetPost(""));
         getPost(postId)
             .then(response => {
                 console.log(response.data);
